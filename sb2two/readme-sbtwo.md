@@ -31,7 +31,7 @@
 
 ####3.通过命令行设置属性值
     1.java -jar xxx.jar -server.port=8888 
-        通过使用–server.port属性来设置xxx.jar应用的端口为8888
+        通过使用–-server.port属性来设置xxx.jar应用的端口为8888
     2.java -jar xxx.jar --server.port=8888
         在命令行运行时，连续的两个减号--就是对application.properties中的属性值进行赋值的标识。
         所以，java -jar xxx.jar --server.port=8888命令，等价于我们在application.properties中添加属性server.port=8888

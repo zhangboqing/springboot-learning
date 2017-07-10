@@ -26,6 +26,7 @@
     
     2.@RestController
     @ResponseBody和@Controller的合集
+    Spring4之后加入的注解，原来在@Controller中返回json需要@ResponseBody来配合，如果直接用@RestController替代@Controller就不需要再配置@ResponseBody，默认返回json格式。
     
     3.@EnableAutoConfiguration
     Spring Boot自动配置（auto-configuration）：尝试根据你添加的jar依赖自动配置你的Spring应用。

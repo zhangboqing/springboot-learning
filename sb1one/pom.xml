@@ -4,11 +4,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.zbq</groupId>
-    <artifactId>sbone</artifactId>
+    <artifactId>sb1one</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>sbone</name>
+    <name>sb1one</name>
     <description>Demo project for Spring Boot</description>
 
     <parent>
