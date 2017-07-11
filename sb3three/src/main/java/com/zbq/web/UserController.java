@@ -10,7 +10,7 @@ import java.util.*;
  * sping boot实现简单对象操作的RESTFUL API
  */
 @RestController
-@RequestMapping(value="/user")     // 通过这里配置使下面的映射都在/users下，可去除
+@RequestMapping(value="/users")     // 通过这里配置使下面的映射都在/users下，可去除
 public class UserController {
 
     //创建线程安全的map

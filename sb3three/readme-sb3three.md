@@ -3,7 +3,10 @@
 ####1.实现简单对象操作的RESTFUL API
     与spring项目编写一样，只是多了几种注解
     
-####2.@ModelAttribute注解的使用
+####2.单元测试
+    通过MockMvc进行测试
+    
+####3.@ModelAttribute注解的使用
     注意：访问控制器方法时，会优先调用被@ModelAttribute修饰的方法,但是加了@RequestMapping的方法不会被调用
     1.@ModelAttribute注释void返回值的方法
     2.@ModelAttribute注释返回具体类的方法
@@ -26,4 +29,4 @@
            return "helloWorld.jsp";    
         }    
     }  
-    
+   
