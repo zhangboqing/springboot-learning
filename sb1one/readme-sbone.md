@@ -1,4 +1,4 @@
-##sping boot入门(基本项目构建，引入web模块，完成一个简单的RESTful API)
+##sping boot入门 基本项目构建、spring boot中的注解、Spring Boot 工程结构最佳实践
     Spring Boot让我们的Spring应用变的更轻量化。
     比如：你可以仅仅依靠一个Java类来运行一个Spring引用。
     你也可以打包你的应用为jar并通过使用java -jar来运行你的Spring Web应用。
@@ -68,6 +68,32 @@
     
     11.@Inject
     等价于默认的@Autowired，只是没有required属性；
+    
+    
+ ####Spring Boot 工程结构最佳实践
+    典型示例
+    
+    root package结构：com.example.myproject
+    应用主类Application.java置于root package下，通常我们会在应用主类中做一些框架配置扫描等配置，我们放在root package下可以帮助程序减少手工配置来加载到我们希望被Spring加载的内容
+    实体（Entity）与数据访问层（Repository）置于com.example.myproject.domain包下
+    逻辑层（Service）置于com.example.myproject.service包下
+    Web层（web）置于com.example.myproject.web包下    
+    
+    com
+      +- example
+        +- myproject
+          +- Application.java
+          |
+          +- domain
+          |  +- Customer.java
+          |  +- CustomerRepository.java
+          |
+          +- service
+          |  +- CustomerService.java
+          |
+          +- web
+          |  +- CustomerController.java
+          |
 
     
     
