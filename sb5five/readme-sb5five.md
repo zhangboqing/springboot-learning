@@ -76,5 +76,46 @@
     update：最常用的属性，第一次加载hibernate时根据model类会自动建立起表的结构（前提是先建立好数据库），以后加载hibernate时根据model类自动更新表结构，即使表结构改变了但表中的行仍然存在不会删除以前的行。要注意的是当部署到服务器后，表结构是不会被马上建立起来的，是要等应用第一次运行起来后才会。
     validate：每次加载hibernate时，验证创建数据库表结构，只会和数据库中的表进行比较，不会创建新表，但是会插入新值。
     
-    3.我们只需要通过编写一个继承自JpaRepository的接口就能完成数据访问
+    JPA的传统配置在persistence.xml文件中，但是这里我们不需要,最好在构建项目时候按照之前提过的最佳实践的工程结构来组织，这样以确保各种配置都能被框架扫描到
     
+    3.我们只需要通过编写一个继承自JpaRepository的接口就能完成数据访问
+    3.1创建实体类
+        创建一个User实体，包含id（主键）、name（姓名）、age（年龄）属性，通过ORM框架其会被映射到数据库表中，由于配置了hibernate.hbm2ddl.auto，在应用启动的时候框架会自动去数据库中创建对应的表。
+        
+        @Entity
+        public class User {
+            @Id
+            @GeneratedValue
+            private Long id;
+            @Column(nullable = false)
+            private String name;
+            @Column(nullable = false)
+            private Integer age;
+            // 省略构造函数
+            // 省略getter和setter
+        }
+      
+     3.2创建数据访问接口
+     
+        public interface UserRepository extends JpaRepository<User, Long> {
+            User findByName(String name);
+            User findByNameAndAge(String name, Integer age);
+            @Query("from User u where u.name=:name")
+            User findUser(@Param("name") String name);
+        }
+        
+       在Spring-data-jpa中，只需要编写类似上面这样的接口就可实现数据访问。不再像我们以往编写了接口时候还需要自己编写接口实现类，直接减少了我们的文件清单。
+        
+       下面对上面的UserRepository做一些解释，该接口继承自JpaRepository，
+       通过查看JpaRepository接口的API文档，可以看到该接口本身已经实现了创建（save）、更新（save）、删除（delete）、查询（findAll、findOne）等基本操作的函数，
+       因此对于这些基础操作的数据访问就不需要开发者再自己定义。
+    
+    在上例中，我们可以看到下面两个函数：
+    
+    User findByName(String name)
+    User findByNameAndAge(String name, Integer age)
+    它们分别实现了按name查询User实体和按name和age查询User实体，可以看到我们这里没有任何类SQL语句就完成了两个条件查询方法。这就是Spring-data-jpa的一大特性：通过解析方法名创建查询。
+    
+    除了通过解析方法名来创建查询外，它也提供通过使用@Query 注解来创建查询，您只需要编写JPQL语句，并通过类似“:name”来映射@Param指定的参数，就像例子中的第三个findUser函数一样。
+    
+    对于Spring-data-jpa的使用只是介绍了常见的使用方式。诸如@Modifying操作、分页排序、原生SQL支持以及与Spring MVC的结合使用等等
