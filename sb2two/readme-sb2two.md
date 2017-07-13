@@ -51,3 +51,4 @@
     3.通过命令行方式去激活不同环境的配置
     执行java -jar xxx.jar --spring.profiles.active=release
     
+    
